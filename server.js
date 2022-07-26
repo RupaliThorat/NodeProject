@@ -1,13 +1,14 @@
-var express=require("express");
-var app = express();
-var bodyParser=require("body-parser");
+const http=require("http");
 
- 
- //add middleware
- app.use(bodyParser.json());
- app.use(bodyParser.urlencoded({extended:true}));
+// it will create server and handle every request comes to the server
 
+var server=http.createServer(function(req,resp){
+     console.log("received request :"+req.url+"------>"+req.method);
+     resp.writeHeader(200,{'content-type':'text/html','content-length':100})    //application/json   image/jpg  
+     resp.write("<h1>Hello world!!</h1>");
+     resp.end("<h2>Response ended</h2>");
 
- app.listen(7000);
- console.log("Producthub service listening on port 7000");
- 
+});
+//to start the server
+server.listen(3000);
+console.log("server running at port 3000");
